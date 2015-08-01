@@ -54,8 +54,12 @@ project_name: "dev"
 project_url: "dev.dev"
 ```
 
-Start the server with `vagrant up`
-If `vagrant up` fails, please run `vagrant destroy -f`. Then save and remove the project folder.
+**Start** the server with `vagrant up`
+If `vagrant up` outputs an error, please run `vagrant destroy -f`. Then save and remove the project folder.
+
+**Stop** the server with `vagrant halt`
+
+**Resume** the server with `vagrant up`
 
 ### MySQL
 `mysql -u root -proot`
