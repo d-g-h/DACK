@@ -101,8 +101,6 @@ For Multisite use, enabled options, {{PROJECT_NAME}}/group_vars/all.yml, toggle 
 
 Update hosts file for subdomains
 
-![Hosts for Subdomains](/src/img/update_hosts.png)
-
 Enable the network
 
 ![Enable network](/src/img/enable_network.png)
