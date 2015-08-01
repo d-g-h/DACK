@@ -94,8 +94,6 @@ Accept RSA Keyprint
 
 Select the database
 
-![Select database](/src/img/Screen%20Shot%202014-08-05%20at%209.00.13%20AM.png)
-
 ### WP Multisite
 For Multisite use, enabled options, {{PROJECT_NAME}}/group_vars/all.yml, toggle `true` or `false`
 
