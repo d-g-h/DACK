@@ -1,6 +1,6 @@
 # DACK Playbooks
 
-This is a set of [Ansible](http://www.ansible.com) playbooks that launches the latest version of WordPress, PHP 5.6+, and can be used for static site (use .html extensions) development.
+This is a set of [Ansible](http://www.ansible.com) playbooks that launches the latest version of WordPress, PHP 5.6+, and can be used for static site (use .html extensions) local development, and only local for development now.
 
 ### Issues
 File a detailed issue with your errors messages, or any suggestions in the issue panel, or a pull request.
