@@ -1,0 +1,56 @@
+---
+- name: "MySQL | install"
+  apt:
+    pkg="{{ item }}"
+    state="present"
+    update_cache=yes
+  with_items:
+    - "mysql-server"
+    - "python-mysqldb"
+  tags:
+    - "mysql"
+    - "packages"
+
+- name: "MySQL | my.cnf"
+  template:
+    src="my.cnf.j2"
+    dest="/etc/mysql/my.cnf"
+  notify: restart mysql
+  tags: "mysql"
+
+- name: "MySQL | set root password"
+  sudo: "yes"
+  mysql_user:
+    name="root"
+    password="{{ mysql_root_password | default('root') }}"
+    host="{{ item }}"
+    state="present"
+  with_items:
+    - "localhost"
+  tags: "mysql"
+
+- name: "MySQL | credentials file"
+  template:
+    src="user.my.cnf.j2"
+    dest="{{ admin_home_directory }}/.my.cnf"
+    owner="{{ admin_user }}"
+    mode="0600"
+  tags: "mysql"
+
+- name: "MySQL | create database"
+  mysql_db:
+    login_user="{{ mysql_root_user}}"
+    login_password="{{ mysql_root_password }}"
+    name="{{ mysql_app_database }}"
+  tags: "mysql"
+
+- name: "mysql | set wordpress user and password"
+  mysql_user:
+    password="{{ mysql_app_password | default('password') }}"
+    host="localhost"
+    login_user="{{ mysql_root_user}}"
+    login_password="{{ mysql_root_password }}"
+    name="{{ mysql_app_user | default('username') }}"
+    priv=*.*:ALL
+    state=present
+  tags: "mysql"

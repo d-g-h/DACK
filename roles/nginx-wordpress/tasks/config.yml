@@ -1,0 +1,26 @@
+---
+
+- name: "WordPress | create wp-config"
+  when: nginx_wordpress_multisite != 'true'
+  template:
+    src="wp-config.php.j2"
+    dest="{{ nginx_wordpress_install_directory }}/wp-config.php"
+    owner="{{ admin_user }}"
+    group="{{ admin_user }}"
+    mode="0644"
+  tags:
+    - "nginx-wordpress"
+    - "config"
+
+- name: "WordPress | create wp-config multisite"
+  when: nginx_wordpress_multisite == 'true'
+  template:
+    src="wp-config-multisite.php.j2"
+    dest="{{ nginx_wordpress_install_directory }}/wp-config.php"
+    owner="{{ admin_user }}"
+    group="{{ admin_user }}"
+    mode="0644"
+  tags:
+    - "nginx-wordpress"
+    - "config"
+

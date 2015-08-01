@@ -1,0 +1,19 @@
+---
+
+- name: "UFW | allow web traffic"
+  ufw:
+    port="80"
+    proto="tcp"
+    rule="allow"
+  tags:
+    - "nginx"
+    - "ufw"
+
+- name: "UFW | allow secure web traffic"
+  ufw:
+    port="443"
+    proto="tcp"
+    rule="allow"
+  tags:
+    - "nginx"
+    - "ufw"

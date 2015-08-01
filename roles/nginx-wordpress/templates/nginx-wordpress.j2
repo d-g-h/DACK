@@ -1,0 +1,20 @@
+server {
+
+  listen 80;
+  server_name {{ nginx_wordpress_hostname }} *.{{ nginx_wordpress_hostname }};
+
+  root {{ nginx_wordpress_install_directory }};
+
+  location / {
+    index index.php index.html index.htm;
+    try_files $uri $uri/ /index.php?q=$uri&$args;
+  }
+
+  # PHP-FPM
+  location ~* \.php {
+    include /etc/nginx/fastcgi_params;
+    fastcgi_pass   unix:/var/run/php5-fpm.sock;
+
+  }
+
+}

@@ -1,0 +1,26 @@
+server {
+
+  listen 80;
+  server_name {{ nginx_wordpress_hostname }} *.{{ nginx_wordpress_hostname }};
+
+  root {{ nginx_wordpress_install_directory }};
+
+  location / {
+    index index.php index.html index.htm;
+    try_files $uri $uri/ /index.php?q=$uri&$args;
+  }
+
+  # Rewrite rules for WordPress Multi-site.
+  if (!-e $request_filename) {
+    rewrite /wp-admin$ $scheme://$host$uri/ permanent;
+    rewrite ^/[_0-9a-zA-Z-]+(/wp-.*) $1 last;
+    rewrite ^/[_0-9a-zA-Z-]+(/.*\.php)$ $1 last;
+  }
+
+  # PHP-FPM
+  location ~* \.php {
+    include /etc/nginx/fastcgi_params;
+    fastcgi_index index.php;
+    fastcgi_pass   unix:/var/run/php5-fpm.sock;
+  }
+}

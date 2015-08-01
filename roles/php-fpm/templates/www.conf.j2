@@ -1,0 +1,18 @@
+[www]
+user = www-data
+group = www-data
+listen = /var/run/php5-fpm.sock
+listen.owner = www-data
+listen.group = www-data
+listen.mode = 0600
+pm = dynamic
+pm.max_children = {{ php_max_children | default('48') }}
+pm.start_servers = {{ php_start_servers | default('8') }}
+pm.min_spare_servers = {{ php_min_spare_servers | default('8') }}
+pm.max_spare_servers = {{ php_max_spare_servers | default('16') }}
+pm.max_requests = 1000
+chdir = /
+;php_value[session.save_handler] = files
+;php_value[session.save_path] = /var/lib/php/session
+;php_admin_value[error_log] = /var/log/php-fpm/wordpress-error.log
+;php_admin_flag[log_errors] = on

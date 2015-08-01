@@ -1,0 +1,25 @@
+---
+- name: "WordPress | download latest version"
+  sudo: "yes"
+  get_url:
+    url="{{ nginx_wordpress_latest_version }}"
+    dest="{{ admin_home_directory }}/wordpress.latest.tar.gz"
+  tags: "nginx-wordpress"
+
+- name: "WordPress | create webroot directory"
+  file:
+    path="{{ nginx_wordpress_install_directory }}"
+    state="directory"
+    owner="{{ admin_user }}"
+    group="{{ admin_user }}"
+    mode="0755"
+  tags: "nginx-wordpress"
+
+- name: "WordPress | extract archive"
+  sudo: "yes"
+  shell:
+    tar -xzf {{ admin_home_directory }}/wordpress.latest.tar.gz --strip-components 1 -C {{ nginx_wordpress_install_directory }}/
+  tags: "nginx-wordpress"
+
+- include: "config.yml"
+- include: "nginx.yml"

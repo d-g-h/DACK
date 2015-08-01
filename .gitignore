@@ -1,0 +1,7 @@
+.vagrant
+host_vars
+sync
+*.staging.radishlab.com
+wordpress.latest.tar.gz
+.vagrant
+.my.*

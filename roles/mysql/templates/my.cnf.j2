@@ -1,0 +1,47 @@
+[client]
+port = {{ mysql_port }}
+socket = /var/run/mysqld/mysqld.sock
+
+[mysqld]
+user=mysql
+bind-address = {{ mysql_bind_ip_address | default('127.0.0.1') }}
+port = {{ mysql_port }}
+socket = /var/run/mysqld/mysqld.sock
+
+key_buffer_size = {{ mysql_key_buffer_size | default('256M') }}
+sort_buffer_size = 1M
+read_buffer_size = 1M
+read_rnd_buffer_size = 4M
+myisam_sort_buffer_size = 64M
+max_allowed_packet = 1M
+table_open_cache = 256
+thread_cache_size = 8
+query_cache_size = {{ mysql_query_cache_size | default('256M') }}
+tmp_table_size = {{ mysql_tmp_table_size | default('64M') }}
+max_heap_table_size = {{ mysql_max_heap_table_size | default('64M') }}
+table_cache = 512
+thread_concurrency = 8
+
+log-error = mysql-error
+log-slow-queries = mysql-slow
+expire-logs-days = 14
+server-id = 1
+
+skip-external-locking
+skip-name-resolve
+
+[mysqldump]
+quick
+max_allowed_packet = 16M
+
+[mysql]
+no-auto-rehash
+
+[myisamchk]
+key_buffer_size = 128M
+sort_buffer_size = 128M
+read_buffer = 2M
+write_buffer = 2M
+
+[mysqlhotcopy]
+interactive-timeout

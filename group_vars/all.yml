@@ -1,0 +1,31 @@
+---
+
+ansible_ssh_user: "vagrant"
+
+project_name: "dev"
+project_url: "dev.dev"
+admin_user: "www-data"
+admin_home_directory: "/var/www"
+current_date: "{{ ansible_date_time.year }}{{ ansible_date_time.month }}{{ ansible_date_time.day }}"
+ssh_port: "22"
+timezone: "America/New_York"
+
+# MySQL
+mysql_default_hosts:
+  - "127.0.0.1"
+  - "::1"
+  - "localhost"
+mysql_port: "3306"
+mysql_root_user: "root"
+mysql_root_password: "root"
+mysql_app_database: "{{project_name}}"
+mysql_app_user: "username"
+mysql_app_password: "password"
+
+# WordPress NGINX
+nginx_wordpress_multisite: "false"
+nginx_wordpress_multisite_subdomain: "true"
+nginx_wordpress_multisite_subdirectory: "false"
+nginx_wordpress_install_directory: "{{admin_home_directory }}/{{project_url}}"
+nginx_wordpress_latest_version: "https://wordpress.org/latest.tar.gz"
+nginx_wordpress_hostname: "{{project_url}}"

@@ -1,0 +1,81 @@
+---
+- name: "Get Distro | Add ppa repo"
+  sudo: yes
+  apt_repository: repo=ppa:ondrej/php5-5.6
+
+- name: "Update apt-get"
+  sudo: yes
+  apt: update_cache=yes
+
+- name: "PHP | install (current stable)"
+  sudo: yes
+  apt: pkg=php5 state=latest
+
+- name: "PHP-FPM | install"
+  apt: update_cache=yes
+    name="{{ item }}"
+    state="present"
+  with_items:
+    - "php5-fpm"
+    - "php5-cgi"
+    - "php5-cli"
+    - "php5-curl"
+    - "php5-gd"
+    - "php5-json"
+    - "php5-mysql"
+  tags:
+    - "php-fpm"
+    - "packages"
+
+- name: "PHP-FPM | raise post max upload limit"
+  lineinfile:
+    dest="/etc/php5/fpm/php.ini"
+    regexp="^post_max_size"
+    line="post_max_size = {{ php_post_max_size | default('100M') }}"
+    state="present"
+  notify: "restart php-fpm"
+  tags: "php-fpm"
+
+- name: "PHP-FPM | raise file max upload limit"
+  lineinfile:
+    dest="/etc/php5/fpm/php.ini"
+    regexp="^upload_max_filesize"
+    line="upload_max_filesize = {{ php_upload_max_filesize | default('100M') }}"
+    state="present"
+  notify: "restart php-fpm"
+  tags: "php-fpm"
+
+- name: "PHP-FPM | allow wp-cli"
+  lineinfile:
+    dest="/etc/php5/cli/php.ini"
+    regexp="^suhosin.executor.include.whitelist"
+    line="suhosin.executor.include.whitelist=\"phar\""
+    state="present"
+  tags: "php-fpm"
+
+- name: "PHP-FPM | find PHP conf.d"
+  stat:
+    path="/etc/php5/mods-available"
+  register: "php_mods_dir"
+  tags: "php-fpm"
+
+- name: "PHP-FPM | Zend Opcache"
+  template:
+    src="05-opcache.ini.j2"
+    dest="/etc/php5/fpm/conf.d/05-opcache.ini"
+  notify: "restart php-fpm"
+  tags: "php-fpm"
+
+- name: "PHP-FPM | php-fpm.conf"
+  template:
+    src="php-fpm.conf.j2"
+    dest="/etc/php5/fpm/php-fpm.conf"
+  notify: "restart php-fpm"
+  tags: "php-fpm"
+
+- name: "PHP-FPM | pool.conf"
+  template:
+    src="www.conf.j2"
+    dest="/etc/php5/fpm/pool.d/www.conf"
+  notify: "restart php-fpm"
+  tags: "php-fpm"

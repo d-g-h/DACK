@@ -1,0 +1,13 @@
+---
+
+- name: "UFW | allow MySQL port"
+  ufw:
+    from_ip="{{ item }}"
+    to_port="{{ mysql_port }}"
+    proto="tcp"
+    rule="allow"
+  with_items: mysql_app_hosts
+  when: mysql_app_hosts is defined
+  tags:
+    - "mysql"
+    - "ufw"

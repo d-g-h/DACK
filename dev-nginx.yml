@@ -1,0 +1,8 @@
+---
+- hosts: dack
+  gather_facts: 'yes'
+  roles:
+    - 'nginx'
+    - 'mysql'
+    - 'php-fpm'
+    - 'nginx-wordpress'

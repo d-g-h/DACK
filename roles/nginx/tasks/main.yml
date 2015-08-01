@@ -1,0 +1,40 @@
+---
+
+- name: "Nginx | install"
+  apt:
+    name="nginx"
+    state="present"
+    update_cache=yes
+  tags:
+    - "nginx"
+    - "packages"
+
+- name: "Nginx | nginx.conf"
+  template:
+    src="nginx.conf.j2"
+    dest="/etc/nginx/nginx.conf"
+  notify: "restart nginx"
+  tags: "nginx"
+
+- name: "Nginx | create site directories"
+  file:
+    path="/etc/nginx/{{ item }}"
+    owner="root"
+    group="root"
+    mode="0755"
+    state="directory"
+  with_items:
+    - "sites-available"
+    - "sites-enabled"
+    - "conf.d"
+  notify: "restart nginx"
+  tags: "nginx"
+
+- name: "Nginx | remove default virtual host"
+  file:
+    path="/etc/nginx/sites-enabled/default"
+    state="absent"
+  notify: "restart nginx"
+  tags: "nginx"
+
+- include: "ufw.yml"

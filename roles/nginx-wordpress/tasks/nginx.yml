@@ -1,0 +1,41 @@
+---
+
+- name: "WordPress | nginx virtual hosts"
+  template:
+    src="nginx-wordpress.j2"
+    dest="/etc/nginx/sites-available/{{project_url}}.conf"
+  when: nginx_wordpress_multisite != 'true'
+  tags:
+    - "nginx-wordpress"
+    - "nginx"
+
+- name: "WordPress | nginx virtual multisite subdomain hosts"
+  template:
+    src="nginx-multisite-wordpress-subdomain.j2"
+    dest="/etc/nginx/sites-available/{{project_url}}.conf"
+  when: nginx_wordpress_multisite == 'true' and nginx_wordpress_multisite_subdomain == 'true'
+  tags:
+    - "nginx-wordpress"
+    - "nginx"
+
+- name: "WordPress | nginx virtual multisite subdirectory hosts"
+  template:
+    src="nginx-multisite-wordpress-subdirectory.j2"
+    dest="/etc/nginx/sites-available/{{project_url}}.conf"
+  when: nginx_wordpress_multisite == 'true' and nginx_wordpress_multisite_subdirectory == 'true'
+  tags:
+    - "nginx-wordpress"
+    - "nginx"
+
+- name: "WordPress | nginx virtual host symlinks"
+  file:
+    src="/etc/nginx/sites-available/{{ item }}"
+    dest="/etc/nginx/sites-enabled/{{ item }}"
+    state="link"
+    force="yes"
+  with_items:
+    - "{{project_url}}.conf"
+  notify: restart nginx
+  tags:
+    - "nginx-wordpress"
+    - "nginx"

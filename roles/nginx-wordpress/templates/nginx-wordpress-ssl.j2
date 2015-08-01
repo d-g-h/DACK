@@ -1,0 +1,28 @@
+server {
+
+  listen 443 ssl;
+  server_name {{ nginx_wordpress_hostname }};
+
+  root {{ nginx_wordpress_install_directory }}/public;
+  index index.php index.html redirect.php;
+
+  include {{ nginx_wordpress_install_directory }}/nginx-ssl.conf;
+  include {{ nginx_wordpress_install_directory }}/nginx.conf;
+
+  # HTTPS
+  ssl_certificate /etc/ssl/private/app/server.crt;
+  ssl_certificate_key /etc/ssl/private/app/server.key;
+
+  ssl_prefer_server_ciphers on;
+  ssl_protocols SSLv3 TLSv1 TLSv1.1 TLSv1.2;
+  ssl_ciphers ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:ECDH+3DES:DH+3DES:RSA+AESGCM:RSA+AES:RSA+3DES:!aNULL:!MD5:!DSS;
+
+  # PHP-FPM
+  location ~ \.php {
+    try_files $uri =404;
+    include fastcgi_params;
+    fastcgi_index index.php;
+    fastcgi_pass php;
+  }
+
+}
