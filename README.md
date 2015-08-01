@@ -21,7 +21,7 @@ brew install ansible
 ```
 
 Install Virtualbox and Vagrant (brew-cask is an optional here, or simple head to the links above)
-(Vagrant >= 1.7.4, Virtualbox >= 5.0.0)
+<sub>Vagrant >= 1.7.4, Virtualbox >= 5.0.0</sub>
 
 ```sh
 git clone https://github.com/d-g-h/DACK.git {{PROJECT_NAME}}
