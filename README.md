@@ -14,7 +14,7 @@ File a detailed issue with your errors messages, or any suggestions in the issue
 
 Install [Homebrew](http://brew.sh)
 
-Install via Ansible >= 1.9.2 via homebrew
+Install via Ansible 1.9.2+ via homebrew
 ```sh
 brew update
 brew install ansible
@@ -22,7 +22,7 @@ brew install ansible
 
 Install Virtualbox and Vagrant (brew-cask is an optional here, or simple head to the links above)
 
-<sub>Vagrant >= 1.7.4, Virtualbox >= 5.0.0</sub>
+<sub>Vagrant 1.7.4+, Virtualbox 5.0.0+</sub>
 
 ```sh
 git clone https://github.com/d-g-h/DACK.git {{PROJECT_NAME}}
