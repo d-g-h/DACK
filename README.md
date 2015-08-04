@@ -1,6 +1,6 @@
 # DACK Playbooks
 
-This is a set of [Ansible](http://www.ansible.com) playbooks that launches the latest version of WordPress, PHP 5.6+, and can be used for static site (use .html extensions) development.
+This is a set of [Ansible](http://www.ansible.com) playbooks that launches the latest version of WordPress, PHP 5.6+, and can be used for static site (use .html extensions) local development, and only local for development now.
 
 ### Issues
 File a detailed issue with your errors messages, or any suggestions in the issue panel, or a pull request.
@@ -21,7 +21,8 @@ brew install ansible
 ```
 
 Install Virtualbox and Vagrant (brew-cask is an optional here, or simple head to the links above)
-(Vagrant >= 1.7.4, Virtualbox >= 5.0.0)
+
+<sub>Vagrant >= 1.7.4, Virtualbox >= 5.0.0</sub>
 
 ```sh
 git clone https://github.com/d-g-h/DACK.git {{PROJECT_NAME}}
@@ -54,8 +55,12 @@ project_name: "dev"
 project_url: "dev.dev"
 ```
 
-Start the server with `vagrant up`
-If `vagrant up` fails, please run `vagrant destroy -f`. Then save and remove the project folder.
+**Start** the server with `vagrant up`
+If `vagrant up` outputs an error, please run `vagrant destroy -f`. Then save and remove the project folder.
+
+**Stop** the server with `vagrant halt`
+
+**Resume** the server with `vagrant up`
 
 ### MySQL
 `mysql -u root -proot`
@@ -89,14 +94,10 @@ Accept RSA Keyprint
 
 Select the database
 
-![Select database](/src/img/Screen%20Shot%202014-08-05%20at%209.00.13%20AM.png)
-
 ### WP Multisite
 For Multisite use, enabled options, {{PROJECT_NAME}}/group_vars/all.yml, toggle `true` or `false`
 
 Update hosts file for subdomains
-
-![Hosts for Subdomains](/src/img/update_hosts.png)
 
 Enable the network
 
