@@ -17,7 +17,7 @@ Vagrant.configure("2") do |config|
   config.vm.network :forwarded_port, guest: 8000, host: 8000, auto_correct: true
   config.vm.network :forwarded_port, guest: 3306, host: 3306, auto_correct: true
   config.vm.network :forwarded_port, guest: 22, host: 2254, auto_correct: false, id: "ssh"
-  # Synced folder.
+  # Synced folder
   config.vm.synced_folder ".", "/var/www", :mount_options=> ["dmode=755","fmode=664"], :owner => "www-data", :group => "www-data"
   config.vm.provision :ansible do |ansible|
     ansible.playbook = "dev-nginx.yml"
