@@ -1,6 +1,6 @@
 ---
 
-- name: "WordPress | create wp-config"
+- name: "WordPress | Create wp-config"
   when: nginx_wordpress_multisite != 'true'
   template:
     src="wp-config.php.j2"
@@ -12,7 +12,7 @@
     - "nginx-wordpress"
     - "config"
 
-- name: "WordPress | create wp-config multisite"
+- name: "WordPress | Create wp-config multisite"
   when: nginx_wordpress_multisite == 'true'
   template:
     src="wp-config-multisite.php.j2"

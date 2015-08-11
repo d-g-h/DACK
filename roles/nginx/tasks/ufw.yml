@@ -1,6 +1,6 @@
 ---
 
-- name: "UFW | allow web traffic"
+- name: "UFW | Allow web traffic"
   ufw:
     port="80"
     proto="tcp"
@@ -9,7 +9,7 @@
     - "nginx"
     - "ufw"
 
-- name: "UFW | allow secure web traffic"
+- name: "UFW | Allow secure web traffic"
   ufw:
     port="443"
     proto="tcp"

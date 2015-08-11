@@ -1,6 +1,6 @@
 ---
 
-- name: "Nginx | install"
+- name: "Nginx | Install"
   apt:
     name="nginx"
     state="present"
@@ -16,7 +16,7 @@
   notify: "restart nginx"
   tags: "nginx"
 
-- name: "Nginx | create site directories"
+- name: "Nginx | Create site directories"
   file:
     path="/etc/nginx/{{ item }}"
     owner="root"
@@ -30,7 +30,7 @@
   notify: "restart nginx"
   tags: "nginx"
 
-- name: "Nginx | remove default virtual host"
+- name: "Nginx | Remove default virtual host"
   file:
     path="/etc/nginx/sites-enabled/default"
     state="absent"

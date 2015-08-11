@@ -23,7 +23,7 @@ Vagrant.configure("2") do |config|
     ansible.playbook = "dev-nginx.yml"
     ansible.sudo = true
     #For debugging, verbose mode
-    ansible.raw_arguments = ['-vvvv']
+    #ansible.raw_arguments = ['-vvvv']
   end
   config.vm.define :dack do |dack|
     dack.vm.hostname = "dack"

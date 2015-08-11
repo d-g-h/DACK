@@ -1,4 +1,4 @@
 ---
 
-- name: "restart php-fpm"
+- name: "Restart php-fpm"
   command: service php5-fpm restart

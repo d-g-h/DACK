@@ -1,6 +1,6 @@
 ---
 
-- name: "UFW | allow MySQL port"
+- name: "UFW | Allow MySQL port"
   ufw:
     from_ip="{{ item }}"
     to_port="{{ mysql_port }}"
