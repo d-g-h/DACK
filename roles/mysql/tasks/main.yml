@@ -1,5 +1,5 @@
 ---
-- name: "MySQL | install"
+- name: "MySQL | Install"
   apt:
     pkg="{{ item }}"
     state="present"
@@ -18,7 +18,7 @@
   notify: restart mysql
   tags: "mysql"
 
-- name: "MySQL | set root password"
+- name: "MySQL | Set root password"
   sudo: "yes"
   mysql_user:
     name="root"
@@ -29,7 +29,7 @@
     - "localhost"
   tags: "mysql"
 
-- name: "MySQL | credentials file"
+- name: "MySQL | Credentials file"
   template:
     src="user.my.cnf.j2"
     dest="{{ admin_home_directory }}/.my.cnf"
@@ -37,14 +37,14 @@
     mode="0600"
   tags: "mysql"
 
-- name: "MySQL | create database"
+- name: "MySQL | Create database"
   mysql_db:
     login_user="{{ mysql_root_user}}"
     login_password="{{ mysql_root_password }}"
     name="{{ mysql_app_database }}"
   tags: "mysql"
 
-- name: "mysql | set wordpress user and password"
+- name: "mysql | Set wordpress user and password"
   mysql_user:
     password="{{ mysql_app_password | default('password') }}"
     host="localhost"
