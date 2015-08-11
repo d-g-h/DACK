@@ -28,11 +28,20 @@
     - "php-fpm"
     - "packages"
 
-- name: "PHP-FPM | Raise post max upload limit"
+- name: "PHP-FPM | Raise post max size"
   lineinfile:
     dest="/etc/php5/fpm/php.ini"
     regexp="^post_max_size"
     line="post_max_size = {{ php_post_max_size | default('100M') }}"
+    state="present"
+  notify: "restart php-fpm"
+  tags: "php-fpm"
+
+- name: "PHP-FPM | Raise file max upload limit"
+  lineinfile:
+    dest="/etc/php5/fpm/php.ini"
+    regexp="^upload_max_filesize"
+    line="upload_max_filesize = {{ php_upload_max_filesize | default('100M') }}"
     state="present"
   notify: "restart php-fpm"
   tags: "php-fpm"
