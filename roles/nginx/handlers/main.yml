@@ -1,12 +1,12 @@
 ---
 
-- name: "Restart nginx"
+- name: "restart nginx"
   service:
     name="nginx"
     state="restarted"
     enabled="yes"
 
-- name: "Reload nginx"
+- name: "reload nginx"
   service:
     name="nginx"
     state="reloaded"
