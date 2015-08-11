@@ -7,11 +7,11 @@
   sudo: yes
   apt: update_cache=yes
 
-- name: "PHP | install (current stable)"
+- name: "PHP | Install (current stable)"
   sudo: yes
   apt: pkg=php5 state=latest
 
-- name: "PHP-FPM | install"
+- name: "PHP-FPM | Install modules"
   apt: update_cache=yes
     name="{{ item }}"
     state="present"
@@ -23,11 +23,12 @@
     - "php5-gd"
     - "php5-json"
     - "php5-mysql"
+    - "php5-xdebug"
   tags:
     - "php-fpm"
     - "packages"
 
-- name: "PHP-FPM | raise post max upload limit"
+- name: "PHP-FPM | Raise post max size"
   lineinfile:
     dest="/etc/php5/fpm/php.ini"
     regexp="^post_max_size"
@@ -36,7 +37,7 @@
   notify: "restart php-fpm"
   tags: "php-fpm"
 
-- name: "PHP-FPM | raise file max upload limit"
+- name: "PHP-FPM | Raise file max upload limit"
   lineinfile:
     dest="/etc/php5/fpm/php.ini"
     regexp="^upload_max_filesize"
@@ -45,7 +46,7 @@
   notify: "restart php-fpm"
   tags: "php-fpm"
 
-- name: "PHP-FPM | allow wp-cli"
+- name: "PHP-FPM | Allow wp-cli"
   lineinfile:
     dest="/etc/php5/cli/php.ini"
     regexp="^suhosin.executor.include.whitelist"
@@ -53,7 +54,7 @@
     state="present"
   tags: "php-fpm"
 
-- name: "PHP-FPM | find PHP conf.d"
+- name: "PHP-FPM | Find PHP conf.d"
   stat:
     path="/etc/php5/mods-available"
   register: "php_mods_dir"
