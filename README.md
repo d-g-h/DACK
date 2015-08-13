@@ -16,9 +16,9 @@ This is a set of [Ansible](http://www.ansible.com) playbooks that launches the l
 
 ### Tips
 - Update Guest Additions for Virtualbox
-  https://github.com/dotless-de/vagrant-vbguest
+  - https://github.com/dotless-de/vagrant-vbguest
 - Install wp-cli (php.ini allows this by default)
-  http://wp-cli.org/#install [allow wp-cli](https://github.com/d-g-h/DACK/blob/d764505000880e28489c6b9f60cdd3c4a286ca22/roles/php-fpm/tasks/main.yml#L49)
+  - http://wp-cli.org/#install [allow wp-cli](https://github.com/d-g-h/DACK/blob/d764505000880e28489c6b9f60cdd3c4a286ca22/roles/php-fpm/tasks/main.yml#L49)
 
 ### Issues
 File a detailed issue with your errors messages, or any suggestions in the issue panel, or a pull request.
