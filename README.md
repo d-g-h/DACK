@@ -2,6 +2,25 @@
 
 This is a set of [Ansible](http://www.ansible.com) playbooks that launches the latest version of WordPress, PHP 5.6+, and can be used for static site (use .html extensions) local development, and only local for development now.
 
+
+### Includes
+- php5-fpm
+- php5-cgi
+- php5-cli
+- php5-curl
+- php5-gd
+- php5-json
+- php5-mysql
+- php5-xdebug
+
+
+### Tips
+- Update Guest Additions for Virtualbox
+  - https://github.com/dotless-de/vagrant-vbguest
+- Install wp-cli (php.ini allows this by default)
+  - http://wp-cli.org/#install 
+  - [allow wp-cli](https://github.com/d-g-h/DACK/blob/d764505000880e28489c6b9f60cdd3c4a286ca22/roles/php-fpm/tasks/main.yml#L49)
+
 ### Issues
 File a detailed issue with your errors messages, or any suggestions in the issue panel, or a pull request.
 
